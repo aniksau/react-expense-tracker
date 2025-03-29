@@ -1,15 +1,15 @@
-import { Transaction } from "./types/transactions";
+import { Transaction } from "../types/transactions";
 
 export const TRANSACTIONS: Transaction[] = [
     {
-        dataTime: '2025-03-01T10:15:00Z',
+        dataTime: '2025-03-27T10:15:00Z',
         transactionType: 'income',
         amount: 5000,
         currency: 'INR',
         description: 'Salary Credit'
     },
     {
-        dataTime: '2025-03-02T12:30:00Z',
+        dataTime: '2025-03-26T12:30:00Z',
         transactionType: 'expense',
         amount: 1200,
         currency: 'INR',

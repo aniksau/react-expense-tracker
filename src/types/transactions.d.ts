@@ -1,5 +1,5 @@
 export interface Transaction {
-    dataTime: string;
+    dateTime: string;
     transactionType: TransactionType;
     amount: number;
     currency: 'INR';
