@@ -1,20 +1,20 @@
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import React from "react";
+import { Fab } from "@mui/material";
+import React, { useState } from "react";
 import './BottomNav.css';
-import AddCircle from "@mui/icons-material/AddCircle";
+import AddIcon from '@mui/icons-material/Add';
+import { AddDialog } from "../AddDialog/AddDialog";
 
 export const BottomNav = () => {
-    const [value, setValue] = React.useState(0);
-    return (
-        <BottomNavigation
-            className="bottom-nav"
-            showLabels
-            value={value}
-            onChange={(event, newValue) => {
-                setValue(newValue);
-            }}
-        >
-            <BottomNavigationAction label="Add" icon={< AddCircle />} />
-        </BottomNavigation>
-    )
+    const [addDialogOpen, setAddDialogOpen] = useState(false);
+    return <>
+        <div className="bottom-nav">
+            <Fab color="primary" aria-label="add" onClick={() => setAddDialogOpen(true)}>
+                <AddIcon />
+            </Fab>
+        </div>
+
+        <AddDialog open={addDialogOpen} closeHandler={() => setAddDialogOpen(false)} />
+    </>
+
+
 }

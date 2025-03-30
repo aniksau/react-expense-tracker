@@ -1,34 +1,37 @@
-import React, { createContext, useReducer, ReactNode, JSX } from "react";
+import React, { createContext, ReactNode, JSX } from "react";
 import { Transaction } from "../types/transactions";
-import { transactionReducer } from "./TransactionReducer";
+import { useTransactionMutations, useTransactionsQuery } from "../hooks/useTransactionsQuery";
 
 interface TransactionContextProps {
     transactions: Transaction[];
     addTransaction: (transaction: Transaction) => void;
-    deleteTransaction: (dateTime: string) => void;
+    deleteTransaction: (transaction: Transaction) => void;
+    isLoading: boolean;
 }
-
-const initialState: Transaction[] = [];
 
 export const TransactionContext = createContext<TransactionContextProps>({
     transactions: [],
     addTransaction: () => { },
     deleteTransaction: () => { },
+    isLoading: false
 });
 
 export const TransactionProvider: React.FC<{ children: ReactNode }> = ({ children }): JSX.Element => {
-    const [state, dispatch] = useReducer(transactionReducer, initialState);
+    const { data: transactions = [], isLoading: isFetchingTransactions, error } = useTransactionsQuery();
+    const { addMutation, deleteMutation } = useTransactionMutations();
+
+    const isLoading = isFetchingTransactions || addMutation.isPending || deleteMutation.isPending;
 
     const addTransaction = (transaction: Transaction) => {
-        dispatch({ type: "ADD_TRANSACTION", payload: transaction });
+        addMutation.mutate(transaction);
     };
 
-    const deleteTransaction = (dateTime: string) => {
-        dispatch({ type: "DELETE_TRANSACTION", payload: dateTime });
+    const deleteTransaction = (transaction: Transaction) => {
+        deleteMutation.mutate(transaction);
     };
 
     return (
-        <TransactionContext.Provider value={{ transactions: state, addTransaction, deleteTransaction }}>
+        <TransactionContext.Provider value={{ transactions, addTransaction, deleteTransaction, isLoading }}>
             {children}
         </TransactionContext.Provider>
     );
