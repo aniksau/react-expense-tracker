@@ -6,5 +6,9 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['js-big-decimal']
+  },
+  build: {
+    outDir: './docs',
+    emptyOutDir: true
   }
 })
