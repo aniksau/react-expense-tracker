@@ -131,7 +131,3 @@ react-expense-tracker/
 ## License
 
 This project is licensed under the MIT License.
-
----
-
-Feel free to customize this README based on additional features or project-specific details!

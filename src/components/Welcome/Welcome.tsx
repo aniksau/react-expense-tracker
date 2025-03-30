@@ -34,7 +34,7 @@ export const Welcome = () => {
                     </Box>
 
                     <Typography variant="h5" fontWeight="bold" color="textPrimary" gutterBottom>
-                        Welcome to Your Expense Tracker!
+                        Welcome to Expense Tracker!
                     </Typography>
                     <Typography variant="body1" color="textSecondary" mb={2}>
                         Easily manage your expenses and track your spending.
